@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="public_html/assets/img/banner-github.png" alt="THE BULL HORN — Charge as a bull. Become a minotaur. Clear the realm." width="900">
+  <img src="banner-github.png" alt="THE BULL HORN — Charge as a bull. Become a minotaur. Clear the realm." width="900">
 </p>
 
 <h1 align="center">🐂 THE BULL HORN</h1>
