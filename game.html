@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+  <title>IRONHOLD — Adventure</title>
+  <link rel="icon" href="assets/img/logo/bison-badge.png" type="image/png" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cinzel+Decorative:wght@700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/adventure.css" />
+</head>
+<body class="game-body">
+
+  <!-- 3D stage -->
+  <div id="stage" class="adv-stage">
+    <div class="stage-loading" id="bootMsg"><img src="assets/img/logo/bison-badge.png" style="width:56px;height:56px"><p>Waking the realm…</p></div>
+  </div>
+
+  <!-- Top HUD -->
+  <div class="adv-hud hidden" id="hud">
+    <div class="hud-left">
+      <img class="hud-face" id="hudFace" src="assets/img/logo/bison-badge.png" alt="">
+      <div class="hud-stats">
+        <div class="hud-name"><span id="hudName">Hero</span> <span class="hud-lvl">Lv <b id="hudLvl">1</b></span></div>
+        <div class="bar hp"><span id="hpFill"></span><em id="hpTxt">100/100</em></div>
+        <div class="bar xp"><span id="xpFill"></span></div>
+      </div>
+    </div>
+    <div class="hud-right">
+      <div class="chip form" id="hudForm">🐂 Bull</div>
+      <div class="chip gold"><span>🪙</span><b id="hudGold">0</b></div>
+      <div class="chip zone" id="hudZone">Greenwood Village <b id="hudTownNo">1/5</b></div>
+      <button class="btn btn-ghost btn-sm" id="helpBtn" title="How to play">?</button>
+      <button class="btn btn-ghost btn-sm" id="muteBtn" title="Sound">🔊</button>
+      <button class="btn btn-ghost btn-sm" id="exitBtn" title="Exit to menu">⎋</button>
+    </div>
+  </div>
+
+  <!-- prompt (near portal) -->
+  <div class="adv-prompt hidden" id="prompt"></div>
+  <!-- cleared banner -->
+  <div class="cleared-banner" id="cleared"></div>
+
+  <!-- Controls -->
+  <div class="controls hidden" id="controls">
+    <div class="joystick" id="joystick"><div class="joy-knob" id="joyKnob"></div></div>
+    <div class="action-btns">
+      <button class="abtn potion" id="btnPotion" title="Potion (H)">🧪<small id="potCost">40</small></button>
+      <button class="abtn transform" id="btnTransform" title="Transform (F)">🔄</button>
+      <button class="abtn special mino-only" id="btnSpecial" title="Axe Chop (U)">💥</button>
+      <button class="abtn kick mino-only" id="btnKick" title="Kick (K)">🦵</button>
+      <button class="abtn jump" id="btnJump" title="Jump (Space)">⤒</button>
+      <button class="abtn attack" id="btnAttack" title="Attack (J)">👊</button>
+    </div>
+    <div class="move-hint">WASD to walk · Space jump ×2 · <b>J</b> attack · <b>K</b> kick · <b>U</b> axe · <b>F</b> transform</div>
+  </div>
+
+  <!-- Character select -->
+  <div class="char-select" id="charSelect">
+    <div class="cs-inner">
+      <h1 class="cs-title">Choose Your Hero</h1>
+      <p class="cs-sub">Six champions await. Pick one and step into the realm.</p>
+      <div class="cs-grid" id="csGrid"></div>
+    </div>
+  </div>
+
+  <!-- How to Play -->
+  <div class="howto-overlay" id="howto">
+    <div class="parchment howto-card">
+      <button class="close" id="howtoClose">✕</button>
+      <h2>🐂 How to Play</h2>
+      <p class="howto-lead">You are <b>The Bison</b>. Walk the road through 5 towns, smash every foe, and fell the <b>Rust King</b> at the end.</p>
+      <div class="howto-grid">
+        <div class="hk"><b>Move</b><span>W A S D / Arrows / left stick</span></div>
+        <div class="hk"><b>Jump ×2</b><span>Space &nbsp;/&nbsp; ⤒</span></div>
+        <div class="hk"><b>Transform</b><span><kbd>F</kbd> &nbsp;/&nbsp; 🔄 &nbsp;— Bull ⇄ Minotaur</span></div>
+        <div class="hk"><b>Potion</b><span>🧪 (heal, costs gold)</span></div>
+      </div>
+      <h3>🐂 Bull</h3>
+      <div class="howto-grid">
+        <div class="hk"><b>Charge / Gore</b><span><kbd>J</kbd> / click / 👊 — dash through enemies with your horns</span></div>
+      </div>
+      <h3>👊 Minotaur</h3>
+      <div class="howto-grid">
+        <div class="hk"><b>Punch combo</b><span><kbd>J</kbd> / 👊 (tap to chain 3 hits)</span></div>
+        <div class="hk"><b>Kick</b><span><kbd>K</kbd> / 🦵 (wider, knocks back)</span></div>
+        <div class="hk"><b>Axe Chop</b><span><kbd>U</kbd> / 💥 (huge sweeping hit)</span></div>
+        <div class="hk"><b>Leap</b><span>Space — jump higher than the bull</span></div>
+      </div>
+      <button class="btn btn-gold btn-block" id="howtoGo">Let's go!</button>
+    </div>
+  </div>
+
+  <!-- New world (king defeated) -->
+  <div class="newworld-overlay" id="newworld">
+    <div class="parchment nw-card">
+      <div class="nw-title">👑 THE RUST KING HAS FALLEN</div>
+      <p>The wastes fall silent. A colossal <b>gate</b> grinds open — beyond it, a breakneck dash through a shattered, abstract world.</p>
+      <p class="nw-sub">Level 2 — <b>THE RUN</b>. As the bull: dodge, jump, slide, smash. Grab every coin.</p>
+      <button class="btn btn-gold btn-lg btn-block" id="nwGo">Enter Level 2 — The Run →</button>
+    </div>
+  </div>
+
+  <!-- Down / defeat overlay -->
+  <div class="down-overlay" id="downOverlay">
+    <div class="parchment down-card">
+      <div class="down-title">You Fell…</div>
+      <p>Your wounds drag you back to the village square.</p>
+      <button class="btn btn-gold btn-lg btn-block" id="btnRevive">Rise Again</button>
+    </div>
+  </div>
+
+  <!-- LEVEL 2 runner HUD -->
+  <div class="runner-hud hidden" id="runnerHud">
+    <div class="rh-left"><span class="rh-coin">🪙 <b id="rCoins">0</b></span></div>
+    <div class="rh-mid"><div class="rh-bar"><span id="rDistFill"></span></div><small id="rDistTxt">0 / 900 m</small></div>
+    <div class="rh-right"><div class="rh-hp"><span id="rHpFill"></span></div></div>
+  </div>
+  <!-- LEVEL 2 controls -->
+  <div class="runner-controls hidden" id="runnerControls">
+    <div class="rc-left"><button class="rbtn" id="rcLeft">◀</button><button class="rbtn" id="rcRight">▶</button></div>
+    <div class="rc-right">
+      <button class="rbtn slide" id="rcSlide" title="Slide (S)">▼</button>
+      <button class="rbtn smash" id="rcSmash" title="Smash (J)">👊</button>
+      <button class="rbtn jump" id="rcJump" title="Jump (Space)">⤒</button>
+    </div>
+    <div class="move-hint">◀ ▶ / A D lanes · Space jump · S slide under · J smash boxes</div>
+  </div>
+
+  <!-- Level 2 complete -> Level 3 -->
+  <div class="newworld-overlay" id="l2done">
+    <div class="parchment nw-card">
+      <div class="nw-title">🏁 YOU OUTRAN THE DEVOURER</div>
+      <p>The gate to a land of <b>ice and fire</b> shimmers ahead — <b>Punk Hazard</b>.</p>
+      <p class="nw-sub" id="l2stats">Level 3 is coming soon.</p>
+      <button class="btn btn-gold btn-lg btn-block" id="l2goBtn">Onward to Level 3 →</button>
+    </div>
+  </div>
+  <!-- runner death -> retry -->
+  <div class="down-overlay" id="runnerDown">
+    <div class="parchment down-card">
+      <div class="down-title">Smashed!</div>
+      <p id="runnerDownStats">The obstacles got you.</p>
+      <button class="btn btn-gold btn-lg btn-block" id="runnerRetry">▶ Play Again</button>
+      <button class="btn btn-ghost btn-block" id="runnerExit" style="margin-top:10px">Exit to Menu</button>
+    </div>
+  </div>
+
+  <!-- LEVEL 3 HUD (ice & fire shooter) -->
+  <div class="runner-hud hidden" id="l3hud">
+    <div class="rh-left"><span class="rh-coin">☠ <b id="l3Kills">0</b></span></div>
+    <div class="rh-mid"><small id="l3Wave" style="font-family:'Cinzel',serif;color:#e6bd45;font-weight:700">Wave 1 / 6</small></div>
+    <div class="rh-right"><div class="rh-hp"><span id="l3HpFill"></span></div></div>
+  </div>
+  <div class="controls hidden" id="l3controls">
+    <div class="joystick" id="l3joystick"><div class="joy-knob" id="l3joyKnob"></div></div>
+    <div class="action-btns">
+      <button class="abtn transform" id="l3Transform" title="Transform (F)">🔄</button>
+      <button class="abtn" id="l3Melee" title="Melee (J)">👊</button>
+      <button class="abtn jump" id="l3Jump" title="Jump (Space)">⤒</button>
+      <button class="abtn attack" id="l3Fire" title="Shoot fire (click / L)">🔥</button>
+    </div>
+    <div class="move-hint">move · <b>F</b> transform · <b>J</b> melee · <b>Space</b> jump · click / 🔥 shoot fire · survive 6 waves</div>
+  </div>
+  <div class="newworld-overlay win-overlay" id="l3win">
+    <div class="parchment nw-card win-card">
+      <div class="win-trophy">🏆</div>
+      <div class="nw-title">🔥❄ PUNK HAZARD CLEARED</div>
+      <p>You felled the <b>Ashen Warden</b> and conquered all three realms. <b>You win!</b></p>
+      <div class="reward-badge"><span class="rw-amt">50,000</span> <span data-symbol>$MESNA</span><small>victory reward</small></div>
+      <p class="nw-sub" id="l3winStats"></p>
+      <button class="btn btn-gold btn-lg btn-block" id="l3claim">🦊 Connect Phantom to Claim</button>
+      <button class="btn btn-ghost btn-block" id="l3winBtn" style="margin-top:10px">Back to Menu</button>
+    </div>
+  </div>
+
+  <!-- Entry gate: connect wallet or play as guest -->
+  <div class="start-gate" id="startGate">
+    <div class="parchment sg-card">
+      <img class="sg-crest" src="assets/img/logo/bison-badge.png" alt="" />
+      <h1 class="sg-title">THE BULL HORN</h1>
+      <p class="sg-sub">Charge as a bull. Become a minotaur. Clear three realms.</p>
+      <button class="btn btn-gold btn-lg btn-block" id="sgPhantom">🦊 Connect Phantom</button>
+      <button class="btn btn-ghost btn-block" id="sgGuest" style="margin-top:10px">▶ Play as Guest</button>
+      <p class="sg-note" id="sgNote">Playing as a guest is instant. Connect a wallet to claim your <span data-symbol>$MESNA</span> reward after clearing Level 3.</p>
+    </div>
+  </div>
+  <div class="down-overlay" id="l3lose">
+    <div class="parchment down-card">
+      <div class="down-title">Overwhelmed!</div>
+      <p id="l3loseStats"></p>
+      <button class="btn btn-gold btn-lg btn-block" id="l3retry">▶ Play Again</button>
+      <button class="btn btn-ghost btn-block" id="l3exit" style="margin-top:10px">Exit to Menu</button>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/sfx.js"></script>
+  <script src="js/wallet.js"></script>
+  <script src="js/vendor/three.min.js"></script>
+  <script src="js/vendor/GLTFLoader.js"></script>
+  <script src="js/explore.js"></script>
+  <script src="js/runner.js"></script>
+  <script src="js/level3.js"></script>
+  <script src="js/adventure.js"></script>
+</body>
+</html>

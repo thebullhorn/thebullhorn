@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Docs — THE BULL HORN ($MESNA)</title>
+  <meta name="description" content="How to play THE BULL HORN, the three realms, the bull/minotaur transform, controls, $MESNA token and reward claim." />
+  <link rel="icon" href="assets/img/logo/bison-badge.png" type="image/png" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cinzel+Decorative:wght@700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/theme.css" />
+  <style>
+    :root { --maxw: 940px; }
+    body { background:
+        radial-gradient(1100px 560px at 80% -5%, rgba(230,189,69,.14), transparent 60%),
+        radial-gradient(900px 700px at 5% 100%, rgba(43,63,110,.30), transparent 70%),
+        linear-gradient(180deg,#16213d 0%,#241f2a 22%,#1b140d 55%,#0d0906 100%);
+      min-height: 100vh; color: var(--parch); }
+    .doc-nav { position: sticky; top: 0; z-index: 30; backdrop-filter: blur(8px);
+      background: rgba(9,7,5,.72); border-bottom: 1px solid var(--stone-700); }
+    .doc-nav .inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 14px; padding: 12px 24px; }
+    .doc-nav img { width: 38px; height: 38px; }
+    .doc-nav .wm { font-family: var(--font-display); font-weight: 900; font-size: 19px; letter-spacing: .05em;
+      background: linear-gradient(180deg,#f6e4a6,var(--gold),var(--gold-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .doc-nav .sp { flex: 1; }
+    .doc-btn { font-family: var(--font-head); font-weight: 700; font-size: 14px; letter-spacing: .03em; padding: 9px 18px; border-radius: 10px; text-decoration: none; }
+    .doc-btn.gold { background: linear-gradient(180deg,#f2d067,#cf9d29); color: #3a2a08; box-shadow: 0 3px 0 var(--gold-dark); }
+    .doc-btn.ghost { color: var(--parch); box-shadow: inset 0 0 0 2px var(--parch-line); }
+    .doc-btn.ghost:hover { color: var(--gold); box-shadow: inset 0 0 0 2px var(--gold-dark); }
+
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 46px 24px 80px; }
+    .doc-hero { text-align: center; margin-bottom: 30px; }
+    .doc-hero .kicker { display: inline-block; font-family: var(--font-head); font-weight: 700; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--gold-dark); border-radius: 999px; padding: 6px 14px; background: rgba(0,0,0,.3); }
+    .doc-hero h1 { font-family: var(--font-display); font-weight: 900; font-size: clamp(38px,6vw,64px); line-height: 1; margin: 16px 0 10px;
+      background: linear-gradient(180deg,#fbeeb6,var(--gold) 55%,#9a7418); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 3px 2px rgba(0,0,0,.45)); }
+    .doc-hero p { color: var(--parch); opacity: .9; font-size: 18px; max-width: 640px; margin: 0 auto; }
+
+    .toc { display: flex; flex-wrap: wrap; gap: 9px; justify-content: center; margin: 26px 0 40px; }
+    .toc a { font-family: var(--font-head); font-weight: 700; font-size: 13px; color: var(--parch); text-decoration: none; padding: 8px 15px; border-radius: 999px; background: rgba(0,0,0,.32); border: 1px solid var(--stone-600); transition: .15s; }
+    .toc a:hover { color: var(--gold); border-color: var(--gold-dark); background: rgba(230,189,69,.1); }
+
+    section.doc { scroll-margin-top: 80px; margin-bottom: 26px; padding: 26px 28px; border-radius: 16px;
+      background: linear-gradient(180deg, rgba(28,22,15,.72), rgba(16,12,8,.66)); border: 1px solid var(--stone-700); box-shadow: 0 8px 26px rgba(0,0,0,.35); }
+    section.doc > h2 { font-family: var(--font-display); font-weight: 900; font-size: 26px; color: var(--gold); margin: 0 0 6px; display: flex; align-items: center; gap: 10px; }
+    section.doc > p, section.doc li { color: #ded2be; line-height: 1.65; font-size: 15.5px; }
+    section.doc a { color: var(--gold); }
+    .lead { font-size: 16.5px !important; }
+
+    .realms { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 14px; }
+    .realm { border-radius: 14px; padding: 16px; background: rgba(0,0,0,.28); border: 1px solid var(--stone-600); }
+    .realm .rn { font-family: var(--font-head); font-weight: 700; font-size: 12px; letter-spacing: .12em; color: var(--gold); text-transform: uppercase; }
+    .realm h3 { font-family: var(--font-display); font-weight: 900; color: var(--parch); font-size: 19px; margin: 4px 0 6px; }
+    .realm p { font-size: 13.5px !important; color: #cabfa9; margin: 0; }
+
+    .forms { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 12px; }
+    .form-card { border-radius: 14px; padding: 16px 18px; background: rgba(0,0,0,.28); border: 1px solid var(--stone-600); }
+    .form-card h3 { font-family: var(--font-display); font-size: 20px; color: var(--gold); margin: 0 0 6px; }
+
+    table.keys { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14.5px; }
+    table.keys th, table.keys td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--stone-700); }
+    table.keys th { color: var(--gold); font-family: var(--font-head); font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; }
+    table.keys td:first-child { color: var(--parch); font-weight: 700; }
+    kbd { font-family: ui-monospace, Menlo, monospace; background: #000; border: 1px solid var(--stone-600); border-bottom-width: 2px; border-radius: 6px; padding: 1px 7px; font-size: 12.5px; color: var(--gold); }
+
+    .token-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+    .kv { background: rgba(0,0,0,.28); border: 1px solid var(--stone-600); border-radius: 12px; padding: 12px 15px; }
+    .kv b { display: block; color: var(--gold); font-family: var(--font-head); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 3px; }
+    .kv span { color: #ded2be; font-size: 14.5px; word-break: break-word; }
+    .note { margin-top: 14px; padding: 12px 16px; border-radius: 12px; background: rgba(230,189,69,.08); border: 1px solid var(--gold-dark); color: #e9dcc0; font-size: 14px; }
+
+    ol.road { counter-reset: r; list-style: none; padding: 0; margin: 10px 0 0; }
+    ol.road li { position: relative; padding: 6px 0 6px 40px; }
+    ol.road li::before { counter-increment: r; content: counter(r); position: absolute; left: 0; top: 6px; width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(180deg,#f2d067,#cf9d29); color: #3a2a08; font-family: var(--font-head); font-weight: 900; font-size: 13px; display: flex; align-items: center; justify-content: center; }
+
+    details.faq { border-bottom: 1px solid var(--stone-700); padding: 12px 0; }
+    details.faq summary { cursor: pointer; font-family: var(--font-head); font-weight: 700; color: var(--parch); font-size: 15px; list-style: none; }
+    details.faq summary::-webkit-details-marker { display: none; }
+    details.faq summary::before { content: "▸ "; color: var(--gold); }
+    details.faq[open] summary::before { content: "▾ "; }
+    details.faq p { margin: 10px 0 2px; }
+
+    .doc-foot { text-align: center; margin-top: 44px; color: #b7a988; }
+    .doc-foot [data-socials] { display: inline-flex; gap: 10px; justify-content: center; margin: 14px 0; }
+
+    @media (max-width: 720px) { .realms, .forms, .token-grid { grid-template-columns: 1fr; } .doc-nav .wm { display: none; } }
+  </style>
+</head>
+<body>
+  <!-- top nav -->
+  <div class="doc-nav">
+    <div class="inner">
+      <img src="assets/img/logo/bison-badge.png" alt="" />
+      <span class="wm">THE BULL HORN</span>
+      <span class="sp"></span>
+      <span data-socials></span>
+      <a href="index.html" class="doc-btn ghost">← Home</a>
+      <a href="game.html" class="doc-btn gold">▶ Play</a>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="doc-hero">
+      <span class="kicker">📖 Game Docs</span>
+      <h1>THE BULL HORN</h1>
+      <p data-tagline>Charge as a bull. Become a minotaur. Clear the realm.</p>
+    </div>
+
+    <nav class="toc">
+      <a href="#overview">Overview</a>
+      <a href="#start">Quick Start</a>
+      <a href="#realms">The Three Realms</a>
+      <a href="#beast">The Beast</a>
+      <a href="#controls">Controls</a>
+      <a href="#token">$MESNA Token</a>
+      <a href="#reward">Rewards &amp; Wallet</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <section class="doc" id="overview">
+      <h2>🐂 Overview</h2>
+      <p class="lead">THE BULL HORN is a one‑click <b>3D action game</b> for your browser with a
+      meme‑coin identity, <b><span data-symbol>$MESNA</span></b>. You play a shape‑shifting beast —
+      <b>charge as a bull</b>, <b>transform into a minotaur</b> — across three escalating realms:
+      a walkable adventure, a breakneck runner, and an ice‑and‑fire boss arena.</p>
+      <p>No sign‑up wall: press <b>Play</b> and you're in as a guest. Optionally connect a
+      <b>Phantom</b> wallet to claim your victory reward. Everything runs in the browser
+      (Three.js) on ordinary shared hosting — no downloads, no installs.</p>
+    </section>
+
+    <section class="doc" id="start">
+      <h2>🚀 Quick Start</h2>
+      <ol class="road">
+        <li>Open the game and press <b>Play</b>.</li>
+        <li>Choose <b>Connect Phantom</b> or <b>Play as Guest</b> (guest is instant).</li>
+        <li>Walk, fight and clear <b>Level 1</b> → run <b>Level 2</b> → survive <b>Level 3</b>.</li>
+        <li>Beat Level 3 to unlock the <b>victory reward claim</b>.</li>
+      </ol>
+    </section>
+
+    <section class="doc" id="realms">
+      <h2>🗺️ The Three Realms</h2>
+      <p>One continuous journey, three very different games:</p>
+      <div class="realms">
+        <div class="realm">
+          <div class="rn">I · Adventure</div>
+          <h3>🌲 The Realm</h3>
+          <p>Walk the road through five themed towns. Fight foes, collect gold, earn XP &amp; levels,
+          buy potions, and fell the <b>Rust King</b>.</p>
+        </div>
+        <div class="realm">
+          <div class="rn">II · The Run</div>
+          <h3>🏃 The Gauntlet</h3>
+          <p>Auto‑run a 3‑lane track. Dodge, jump, slide and smash crates, and outrun
+          <b>The Devourer</b> to the gate.</p>
+        </div>
+        <div class="realm">
+          <div class="rn">III · Ice &amp; Fire</div>
+          <h3>🔥❄ Punk Hazard</h3>
+          <p>A split ice/fire arena. Use transform + melee + <b>fire‑shooting</b> to survive
+          6 waves of big monsters and the <b>Ashen Warden</b> boss.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="doc" id="beast">
+      <h2>🔄 The Beast — Two Forms</h2>
+      <p>Swap forms at any time (<kbd>F</kbd> / the 🔄 button). Each fights differently:</p>
+      <div class="forms">
+        <div class="form-card">
+          <h3>🐂 Bull</h3>
+          <p>Quadruped bison. <b>Gore‑charge</b> — dash forward and ram enemies with your horns.
+          Fast and heavy‑hitting.</p>
+        </div>
+        <div class="form-card">
+          <h3>👊 Minotaur</h3>
+          <p>Upright brute. <b>Punch / kick / axe</b> combos and a higher <b>jump</b>. In Level 3
+          it also wields the <b>fire‑shooting</b> skill.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="doc" id="controls">
+      <h2>🎮 Controls</h2>
+      <table class="keys">
+        <tr><th>Action</th><th>Desktop</th><th>Mobile</th></tr>
+        <tr><td>Move</td><td><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> / Arrows</td><td>left joystick</td></tr>
+        <tr><td>Transform</td><td><kbd>F</kbd></td><td>🔄</td></tr>
+        <tr><td>Melee attack</td><td><kbd>J</kbd> / click</td><td>👊 / 🐂</td></tr>
+        <tr><td>Jump</td><td><kbd>Space</kbd></td><td>⤒</td></tr>
+        <tr><td>Shoot fire <small>(Level 3)</small></td><td>Click / <kbd>L</kbd></td><td>🔥</td></tr>
+        <tr><td>Potion <small>(Level 1)</small></td><td><kbd>H</kbd></td><td>🧪</td></tr>
+        <tr><td>Runner lanes <small>(Level 2)</small></td><td><kbd>A</kbd> <kbd>D</kbd> · <kbd>S</kbd> slide</td><td>◀ ▶ · ▼</td></tr>
+      </table>
+    </section>
+
+    <section class="doc" id="token">
+      <h2>🪙 <span data-symbol>$MESNA</span> Token</h2>
+      <div class="token-grid">
+        <div class="kv"><b>Symbol</b><span data-symbol>$MESNA</span></div>
+        <div class="kv"><b>Chain</b><span>Solana · launched via pump.fun</span></div>
+        <div class="kv"><b>Contract (CA)</b><span id="caText">Contract coming soon</span></div>
+        <div class="kv"><b>Buy</b><span><a id="buyLink" href="#" target="_blank" rel="noopener">Buy on pump.fun</a></span></div>
+      </div>
+      <div class="note">🚀 Launch countdown, the live contract address and the Buy button all appear
+      on the <a href="index.html">home page</a> once the token goes live. Nothing here is financial advice.</div>
+    </section>
+
+    <section class="doc" id="reward">
+      <h2>🎁 Rewards &amp; Wallet</h2>
+      <p>Clearing <b>Level 3</b> awards a <b>50,000 <span data-symbol>$MESNA</span></b> victory reward.</p>
+      <ul>
+        <li><b>Guests</b> are prompted to <b>Connect Phantom to Claim</b> at the victory screen.</li>
+        <li><b>Connected</b> players claim straight to their wallet address.</li>
+        <li>Connecting is <b>read‑only</b> (address only) — no transaction signing to play.</li>
+      </ul>
+      <div class="note">The claim flow connects your wallet and confirms the reward. On‑chain token
+      settlement goes live alongside the <span data-symbol>$MESNA</span> contract.</div>
+    </section>
+
+    <section class="doc" id="roadmap">
+      <h2>🧭 Roadmap</h2>
+      <ol class="road">
+        <li><b>v1 — Live:</b> three realms, bull/minotaur transform, melee + fire, guest play, Phantom connect + claim flow.</li>
+        <li><b>Token launch:</b> <span data-symbol>$MESNA</span> on pump.fun, live CA + Buy + countdown.</li>
+        <li><b>On‑chain claim:</b> real reward settlement to connected wallets.</li>
+        <li><b>Leaderboards:</b> fastest clear &amp; most kills.</li>
+        <li><b>More content:</b> a fourth realm, cosmetic skins, sound &amp; music pass.</li>
+      </ol>
+    </section>
+
+    <section class="doc" id="faq">
+      <h2>❓ FAQ</h2>
+      <details class="faq"><summary>Do I need a wallet to play?</summary><p>No. Press Play → Play as Guest and start instantly. A wallet is only needed to <b>claim</b> the Level 3 reward.</p></details>
+      <details class="faq"><summary>Which wallet is supported?</summary><p><b>Phantom</b> (Solana). Connecting is address‑only — you never sign a transaction just to play.</p></details>
+      <details class="faq"><summary>Does it work on mobile?</summary><p>Yes — controls, HUD and layout are touch‑friendly with an on‑screen joystick and action buttons.</p></details>
+      <details class="faq"><summary>Is my progress saved?</summary><p>Level 1 progress saves to an anonymous guest tied to your browser (no password).</p></details>
+      <details class="faq"><summary>Where's the contract address?</summary><p>It appears on the <a href="index.html">home page</a> (with a copy button) and above, once the token is live.</p></details>
+    </section>
+
+    <div class="doc-foot">
+      <div data-socials></div>
+      <div><a href="index.html" style="color:var(--gold)">← Back to home</a> &nbsp;·&nbsp; <a href="game.html" style="color:var(--gold)">Play now ▶</a></div>
+      <div style="opacity:.7;margin-top:8px">© <span id="yr"></span> THE BULL HORN · <span data-symbol>$MESNA</span></div>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="js/config-ui.js"></script>
+  <script>
+    document.getElementById('yr').textContent = new Date().getFullYear();
+    // wire the Buy link on docs from config
+    (function(){ var t=(window.SITE_CONFIG||{}).token||{}; var b=document.getElementById('buyLink');
+      if(b && t.caLive && t.ca && t.ca!=='PASTE_CONTRACT_ADDRESS_HERE'){ b.href=t.buyUrl||'#'; } })();
+  </script>
+</body>
+</html>
