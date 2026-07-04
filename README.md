@@ -92,33 +92,6 @@ A ready‑to‑upload archive is produced at **`IRONHOLD-deploy.zip`**.
 Everything marketing‑related lives in **one file** you can edit directly on the server
 (cPanel File Manager), **no rebuild needed**:
 
-**`public_html/config.js`**
-```js
-window.SITE_CONFIG = {
-  gameName: "THE BULL HORN",
-  tagline:  "Charge as a bull. Become a minotaur. Clear the realm.",
-
-  launchISO: "2026-07-05T00:00:00Z",     // launch countdown target
-
-  token: {
-    ca:          "PASTE_CONTRACT_ADDRESS_HERE",  // 👈 your $MESNA contract address
-    caLive:      false,                          // 👈 set true once the CA is live
-    buyUrl:      "https://pump.fun/coin/...",    // 👈 buy link
-    tokenSymbol: "$MESNA"
-  },
-
-  socials: {
-    twitter:  "",   // 👈 https://x.com/...
-    telegram: "",   // 👈 https://t.me/...
-    discord:  "",   // 👈 https://discord.gg/...
-    website:  "",
-    other:    ""
-  }
-};
-```
-
-> ⚠️ **Never** put the database password or any API key in `config.js` (it ships to the browser).
-> Secrets go only in server‑side **`config.php`**.
 
 ---
 
